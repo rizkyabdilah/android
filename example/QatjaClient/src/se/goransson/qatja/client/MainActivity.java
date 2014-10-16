@@ -136,7 +136,12 @@ public class MainActivity extends Activity implements MQTTConnectionConstants,
 		}
 	};
 
-	protected void connect(String host, String clientIdentifier) {
+	protected void connect(String host, String clientIdentifier){
+		connect(host, clientIdentifier, null, null, true);
+	}
+	
+	protected void connect(String host, String clientIdentifier,
+		String username, String password, boolean cleanSession) {
 		// Default host is test.mosquitto.org (you should change this!)
 		client.setHost(host);
 
@@ -145,6 +150,9 @@ public class MainActivity extends Activity implements MQTTConnectionConstants,
 
 		// Set a unique id for this client-broker combination
 		client.setId(clientIdentifier);
+		client.setUsername(username);
+		client.setPassword(password);
+		client.setCleanSession(cleanSession);
 		
 		// Set keep alive time
 		client.setKeepAlive(3000);
