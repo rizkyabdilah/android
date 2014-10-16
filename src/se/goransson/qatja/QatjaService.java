@@ -96,6 +96,8 @@ public class QatjaService extends Service implements MQTTConnectionConstants,
 
 	/** Unique identifier for this client */
 	private String clientIdentifier;
+	private String username;
+	private String password;
 
 	private boolean cleanSession = true;
 
@@ -200,7 +202,7 @@ public class QatjaService extends Service implements MQTTConnectionConstants,
 	 * Send a CONNECT message to the server.
 	 */
 	private void connect(String clientIdentifier) {
-		MQTTConnect connect = new MQTTConnect(clientIdentifier);
+		MQTTConnect connect = new MQTTConnect(clientIdentifier, username, password);
 
 		connect.setCleanSession(cleanSession);
 
@@ -435,6 +437,24 @@ public class QatjaService extends Service implements MQTTConnectionConstants,
 	 */
 	public void setId(String clientIdentifier) {
 		this.clientIdentifier = clientIdentifier;
+	}
+	
+	/**
+	 * Set client username
+	 * 
+	 * @param username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	/**
+	 * Set client password
+	 * 
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setProtocolName(String protocolName) {
